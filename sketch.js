@@ -1,4 +1,4 @@
-var img2 = [ './e1-png/e1-png/png_128/1f57a.png' , './e1-png/e1-png/png_128/1f1fd-1f1f0.png' , './e1-png/e1-png/png_128/1f95e.png']//images for mobile devices where emoji dont like to show up for some reason. 
+var img2 = [ './imageFiles/1f600.svg' , './imageFiles/1f60b.svg' , './imageFiles/1f60d.svg','./imageFiles/1f610.svg','./imageFiles/1f621.svg','./imageFiles/1f62d.svg','./imageFiles/1f630.svg','./imageFiles/1f634.svg','./imageFiles/1f642.svg']//images for mobile devices where emoji dont like to show up for some reason. 
 var EmojiList=['\u{1F4A9}',"😬","😰","😵","😷","💩","😍","😉"];//list of emoji. The first is using unicode.
 var EmojiValue=[1,2,2,3,4,4,5,6]; //values for each emoji on an emotional scale You have to match them up with the same index as the emoji in the emoji list
 var EmojiMessage=[ //the message for each emoji 
@@ -75,7 +75,7 @@ function draw(){
 	//rotate and drawing
 	push();
 	translate(emojiArray[i].position.x,emojiArray[i].position.y);
-	//rotate(radians(frameCount*2+i*40));
+	rotate(radians(frameCount*2+i*40));
 	ellipse(0,0,v*2,v*2);
 	image(img1[emojiArray[i].emojiImg], 0, 0,v*2,v*2);//Make sure the last two arguments are relative to the same as line 34 //Mobile needs the image, because text wont load for some reason.
 	//text(emojiArray[i].pic,0,0); //firefox needs this. It also works with chrome.
