@@ -1,6 +1,6 @@
 var img2 = [ './imageFiles/1f600.svg' , './imageFiles/1f60b.svg' , './imageFiles/1f60d.svg','./imageFiles/1f610.svg','./imageFiles/1f621.svg','./imageFiles/1f62d.svg','./imageFiles/1f630.svg','./imageFiles/1f634.svg','./imageFiles/1f642.svg']//images for mobile devices where emoji dont like to show up for some reason. 
 var EmojiList=['\u{1F4A9}',"😬","😰","😵","😷","💩","😍","😉"];//list of emoji. The first is using unicode.
-var EmojiValue=[1,2,2,3,4,4,5,6]; //values for each emoji on an emotional scale You have to match them up with the same index as the emoji in the emoji list
+var EmojiValue=[1,2,2,3,999,4,5,6,7]; //values for each emoji on an emotional scale You have to match them up with the same index as the emoji in the emoji list
 var EmojiMessage=[ //the message for each emoji 
 	["message1","message2","message3","message4","message5","message6","message7"],
 	["message1","message2","message3","message4","message5","message6","message7"],
@@ -12,10 +12,11 @@ var EmojiMessage=[ //the message for each emoji
 	["message1","message2","message3","message4","message5","message6","message7"],
 ];
 var emojiArray=[];
-var emojiCount=10;//how many emoji we have. For some reason EmojiList.length doesnt work so I had to enter a number in manually.
+var emojiCount=img2.length;//how many emoji we have. For some reason EmojiList.length doesnt work so I had to enter a number in manually.
 var img1=[];
 var emojiSize;
 var newFrameCount=0;
+var waitTimer=3;//how long to wait until it goes to next page.(in seconds)
 function setup(){
 	
 	//download images
@@ -56,7 +57,23 @@ function mouseClicked(){
 			emojiArray[i].acceleration.y=0.1;
 			emojiArray[i].velocity.y=0;
 			newFrameCount=1000;
-			alert("You clicked: "+EmojiList[i%EmojiList.length]+" and your message for this emoji is: "+EmojiMessage[i%EmojiMessage.length][(Math.floor(Math.random()*7))%EmojiMessage[i%EmojiMessage.length].length]+" The value for this emoji on an emotional scale is: " + emojiArray[i%emojiArray.length].value);
+			var message="The message assigned to this emoji is: "+EmojiMessage[i%EmojiMessage.length][(Math.floor(Math.random()*7))%EmojiMessage[i%EmojiMessage.length].length]+"<br> Its value scale is: " + emojiArray[i%emojiArray.length].value;
+			//var message="You clicked: "+EmojiList[i%EmojiList.length]+" and your message for this emoji is: "+EmojiMessage[i%EmojiMessage.length][(Math.floor(Math.random()*7))%EmojiMessage[i%EmojiMessage.length].length]+" The value for this emoji on an emotional scale is: " + emojiArray[i%emojiArray.length].value;
+			document.getElementById('clickedMessage').innerHTML=message;
+			//alert();
+			var now = new Date();
+			//sending the data
+			var time= now.getFullYear() +"-"+now.getMonth()+1+"-"+ now.getDate()+"-"+ now.getHours()+"-"+ now.getMinutes();
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", '/emoji', true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.send(JSON.stringify({
+    			'emoji': [time,EmojiValue[i],i]
+			}));
+
+			//goes to next page
+			setTimeout(function(){ window.location.href = '/report'; }, 1000*waitTimer);
+
 			i=-1;
 		}
 	}
@@ -112,7 +129,6 @@ var createEmoji = function(emoji,img1,emojiSize){
 	this.pic=EmojiList[emoji%EmojiList.length];
 	this.emojiImg=img1;
 	this.value=EmojiValue[emoji];
-	
 	//basic physics simulation
 	this.position=createVector(width/2+random(-width/4,width/4),height/2+random(-height/4,height/4));
 	this.velocity=createVector(random(-2,2),random(-2,2));

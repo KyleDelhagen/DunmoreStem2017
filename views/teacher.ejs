@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head>
+<title>Teacher Page</title>
+<style>
+#extrainfo{display:none;}
+#student{background: #acacac;}
+#student:hover{background: #ffffff;}
+#student:hover #extrainfo, #student.hover #extrainfo {display:block;}
+
+</style>
+</head>
+<body>
+<a href="/logout">Logout of teacher account</a>
+<form action="/teacher" method="post">
+        <label>UserName</label>
+        <input type="text" name="username"><br>
+        <label>Password</label>
+        <input type="password" name="password"><br>
+	<label>Name</label>
+	<input type="text" name="realname"></input><br>
+	<label>isAdmin</label>
+	<input type="checkbox" name="isAdmin"><br>
+        <button type="submit">Create Student Account</button>
+</form>
+
+<div id="students">
+</div>
+<script>//Maybe wrap this entire script in a ejs script that way it is secure
+var userstuff=<%- JSON.stringify(user) %> ;
+var names=[];
+for(var i=0;i<userstuff.length;i++){
+	if(userstuff[i].local.realname!==undefined){
+	names.push({
+		'realname': userstuff[i].local.realname,
+		'health' : userstuff[i].local.realname,
+		'position' : i
+	})
+	}
+}
+for(var i=0;i<names.length;i++){
+	document.getElementById('students').innerHTML+='<div id="student"><div style="float:left">Name: '+names[i].realname+'</div><div style="float:right">Health: '+names[i].health+'</div><br><div id="extrainfo">Other Student Info</div></div>';
+}
+
+</script>
+</body>
+</html>
+
+
+<!--
+have it sort it before it writes to screen or after
+var $divs = $("div.box");
+
+$('#alphBnt').on('click', function(){
+    var alphabeticallyOrderedDivs = $divs.sort(function(a,b){
+        return $(a).find("h1").text() > $(b).find("h1").text();
+    });
+    $("#container").html(alphabeticallyOrderedDivs);
+});
+	    
+$('#numBnt').on('click', function(){
+    var numericallyOrderedDivs = $divs.sort(function(a,b){
+        return $(a).find("h2").text() > $(b).find("h2").text();
+    });
+    $("#container").html(numericallyOrderedDivs);
+});	
+-->
