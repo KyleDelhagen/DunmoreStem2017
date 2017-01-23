@@ -10,15 +10,63 @@
 
     <script src="sketch.js" type="text/javascript"></script>
 
-    <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+    <style> 
+      body {padding: 0; margin: 0;} 
+      canvas {vertical-align: top;} 
+      .welcomeContainer {
+        display: block;
+        margin: auto;
+        width: 50%;
+        height: 30%;
+        padding: 40px;
+        background: #ffaaff;
+        border-bottom-right-radius: 2em;
+        border-bottom-left-radius: 2em;
+      }
+      .welcomeContainer div{
+        display: block;
+        margin: auto;
+        width: 50%;
+        height: 30%;
+        padding: 0;
+        background: #ffaaff;
+        border-bottom-right-radius: 2em;
+        border-bottom-left-radius: 2em;
+        text-align: center;
+      }
+
+      #howAreYou {
+        font: 26px Monaco, MonoSpace;
+        display: block;
+        margin: auto;
+        width: 50%;
+        height: 30%;
+        padding: 20px;
+        background: #ccaaff;
+        text-align: center;
+        border-radius:2em;
+      }
+    </style>
   </head>
   <body>
-    <strong id="welcomeMessage">Welcome Message Goes Here.</strong><br>
-    <strong id="clickedMessage"></strong><br><!The clicked Message Goes Here.->
-
+    <div class="welcomeContainer">
+      <div id="welcomeMessage">Welcome Message Goes Here.</div><br>
+      <div id="funFact">Fun fact goes here</div><br>
+    </div>
+    
+    <p id="clickedMessage"></p><br><!The clicked Message Goes Here.->
+    
+    <h2 id="howAreYou" ></h2><!How are you message->
+    <canvas id="canvas1" width="500" height="500"></canvas>
   <script>
     var welcomeMessages=['Welcome1','Welcome2','Welcome3','Welcome4','Welcome5'];
+    var howAreMessages=['How are you today?','Whats up?',"How you livin'","What's good fam","Placeholder"];
+    var funFact=["Fact 1","Fact2"];
+
     document.getElementById('welcomeMessage').innerHTML=welcomeMessages[Math.floor(Math.random()*welcomeMessages.length)];
+    document.getElementById('howAreYou').innerHTML=howAreMessages[Math.floor(Math.random()*howAreMessages.length)];
+    document.getElementById('funFact').innerHTML=funFact[Math.floor(Math.random()*funFact.length)];
+
 
   </script>
   </body>

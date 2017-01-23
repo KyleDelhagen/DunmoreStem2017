@@ -15,12 +15,13 @@ var User       = require('../app/models/user');
 
 
     // PROFILE SECTION =========================
+    /*
         app.get('/profile', isAdminAccount,function(req, res) {
             res.render('profile.ejs', {
             user : req.user
             });
         });
-
+    */
     // LOGOUT ==============================
         app.get('/logout', function(req, res) {
             req.logout();

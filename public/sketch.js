@@ -16,7 +16,7 @@ var emojiCount=img2.length;//how many emoji we have. For some reason EmojiList.l
 var img1=[];
 var emojiSize;
 var newFrameCount=0;
-var waitTimer=3;//how long to wait until it goes to next page.(in seconds)
+var waitTimer=5;//how long to wait until it goes to next page.(in seconds)
 function setup(){
 	
 	//download images
@@ -25,7 +25,7 @@ function setup(){
 	}
 	
 	//setup stuff
-	createCanvas(300, 300);
+	createCanvas(400, 400);
 	frameRate(60);//how fast/fluid you want this to go. If we set this too high the device may lag.
 	textSize(120);
 	textAlign(CENTER,CENTER);

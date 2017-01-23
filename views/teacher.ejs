@@ -29,7 +29,7 @@
 var userstuff=<%- JSON.stringify(user) %> ;
 var names=[];
 for(var i=0;i<userstuff.length;i++){
-	if(userstuff[i].local.realname!==undefined){
+	if(userstuff[i].local.realname!==undefined&&userstuff[i].local.realname!==""&&userstuff[i].local.isAdmin!==true){
 	names.push({
 		'realname': userstuff[i].local.realname,
 		'health' : userstuff[i].local.realname,
