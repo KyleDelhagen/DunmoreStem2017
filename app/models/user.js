@@ -7,7 +7,9 @@ var userSchema = mongoose.Schema({
         password        : String,
         realname            : String,
 	    isAdmin		: Boolean,
-	    emoji: []
+        schoolLoginDate: [],
+	    emoji: [],
+		ip:[]
     },
     publicReport       :{//This would be if they wanted to say general thoughts
         realname            : String,

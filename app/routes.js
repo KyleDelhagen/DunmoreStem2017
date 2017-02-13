@@ -73,11 +73,29 @@ var User       = require('../app/models/user');
      //   app.post('/emoji',isLoggedIn, passport.authenticate('local-signup', {}));
         app.post('/emoji',isLoggedIn,function(req, res) {
             var user            = req.user;
-            user.local.emoji.push(req.body.emoji);
+            var now = new Date();
+            var before = new Date(2010, 11, 7);
+            if(user.local.emoji.length>=1){
+                before = new Date(user.local.emoji[user.local.emoji.length-1][0]);}
+            var timeDiff = Math.ceil(Math.abs(now.getTime()-before.getTime())/(1000*60));
+            if((timeDiff)>=3||before==""||before==undefined||before==null){
+            var tempVar = req.body.emoji;
+            tempVar[0]=now;
+            user.local.emoji.push(tempVar);
+            //var ip = req.ip || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||req.connection.socket.remoteAddress;
 
+
+            if(ip == "::ffff:127.0.0.1"){
+                console.log("Connected from certain IP "+ip);
+                user.local.schoolLoginDate.push(now);
+			}
+            else{console.log("Its from "+ip);}
+			user.local.ip.push(ip);
             user.save();
+            }
             console.log(user.local.emoji);
-         //   console.log(req.body.emoji);
+            console.log(user.local.schoolLoginDate);
         });
         app.get('/report',isLoggedIn,function(req, res) {
             res.render('report.ejs', {}); 
@@ -90,8 +108,13 @@ var User       = require('../app/models/user');
 
             var newUser            = new User();
 
+            var now = new Date();
+            //sending the data
+            //var time= now.getFullYear() +"-"+now.getMonth()+1+"-"+ now.getDate()+"-"+ now.getHours()+"-"+ now.getMinutes();
+
+
             newUser.publicReport.realname    = user.local.realname;
-            newUser.publicReport.date =  req.body.date;
+            newUser.publicReport.date =  now;
             newUser.publicReport.message = [req.body.message1,req.body.message2,req.body.message3];
             newUser.save();
             //res.render('report.ejs', {}); 

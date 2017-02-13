@@ -9,65 +9,96 @@
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
 
     <script src="sketch.js" type="text/javascript"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     <style> 
-      body {padding: 0; margin: 0;} 
-      canvas {vertical-align: top;} 
-      .welcomeContainer {
-        display: block;
-        margin: auto;
-        width: 50%;
-        height: 30%;
-        padding: 40px;
-        background: #ffaaff;
-        border-bottom-right-radius: 2em;
-        border-bottom-left-radius: 2em;
-      }
-      .welcomeContainer div{
-        display: block;
-        margin: auto;
-        width: 50%;
-        height: 30%;
-        padding: 0;
-        background: #ffaaff;
-        border-bottom-right-radius: 2em;
-        border-bottom-left-radius: 2em;
-        text-align: center;
-      }
+      body {padding: 0; margin: 0;
+		background-image: url("./imageFiles/Horizontalbackground.png");
+      } 
+      #canvas-container {
+		vertical-align: top;
+		margin:0;
+    height:100vh;
+	  }
+		canvas{
+-webkit-box-shadow: 0px 8px 25px 4px rgba(0,155,212,1);
+-moz-box-shadow: 0px 8px 25px 4px rgba(0,155,212,1);
+box-shadow: 0px 8px 25px 4px rgba(0,155,212,1);
+		}
+    @media screen and (orientation:portrait){
+		body { 
+			background-image:url("./imageFiles/Verticalbackground.png");
+			background-repeat: no-repeat;
+		}
+		.TextContainer{
+			border-bottom-right-radius: 1em 0.5em;
+			border-bottom-left-radius: 1em 0.5em;
+
+		}
+    }
+
+
 
       #howAreYou {
-        font: 26px Monaco, MonoSpace;
-        display: block;
-        margin: auto;
-        width: 50%;
-        height: 30%;
-        padding: 20px;
-        background: #ccaaff;
-        text-align: center;
-        border-radius:2em;
+        font: 30px Monaco, MonoSpace;
+        /*background: #ccaaff;*/
       }
+	  .TextContainer{
+		background-color:rgb(255,221,103);
+		border:2px solid rgb(138,107,0);
+	  }
+
+    @media (min-width: 600px) {
+      .TextContainer{height:100vh;}
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+    } 
+	  #welcomeMessage{//background-color:rgb(101,177,239);
+	  font-size:43px;}
+	  #funFact{background-color:rgb(244,103,103);font-size:20px}
+	  #clickedMessage{
+		/*background-color:lightpurple;*/
+	  }
+    .logout{
+      position: absolute;
+      bottom:5px;
+      left:5px;
+      background-color:orange;
+    }
+    .logout a{padding:5px;text-decoration: none}
     </style>
   </head>
   <body>
-    <div class="welcomeContainer">
-      <div id="welcomeMessage">Welcome Message Goes Here.</div><br>
-      <div id="funFact">Fun fact goes here</div><br>
+  <div class="w3-row">
+  <div class="TextContainer w3-col s12 m4 l4 w3-center">
+    <div class="w3-row w3-center">
+      <div class="w3-col s12" id="welcomeMessage">{{Welcome Message}}</div>
+      <div class="w3-col s12" id="funFact">Fun fact goes here</div>
     </div>
-    
-    <p id="clickedMessage"></p><br><!The clicked Message Goes Here.->
-    
-    <h2 id="howAreYou" ></h2><!How are you message->
-    <canvas id="canvas1" width="500" height="500"></canvas>
+    <div class="w3-row w3-center">
+		<h2 id="howAreYou"></h2><!How are you message->
+    </div>
+  </div>
+
+  <div class="w3-center w3-col s12 m8 l8" id="canvas-container"></div>
+  </div>
   <script>
-    var welcomeMessages=['Welcome1','Welcome2','Welcome3','Welcome4','Welcome5'];
-    var howAreMessages=['How are you today?','Whats up?',"How you livin'","What's good fam","Placeholder"];
-    var funFact=["Fact 1","Fact2"];
+    var welcomeMessages=['Welcome!'];
+    var howAreMessages=["How are you feeling today?","Today, I am feeling…","My feeling for today is:","I am feeling:","What is your mood for today?","How are you?","How are you doing?","How are things?","How do you do?","Whats happening?","How are things?","What's new?","What's the word?","What's good?","What`s going on?"];
+    var funFact=["Fun Fact: When hippos are upset, their sweat turns red.","Fun Fact: A flock of crows is known as a murder.","Fun Fact: “Facebook Addiction Disorder” is a mental disorder identified by Psychologists.","Fun Fact: The average woman uses her height in lipstick every 5 years.","Fun Fact: Cherophobia is the fear of fun","Fun Fact: Human saliva has a boiling point three times that of regular water.","Fun Fact: Billy goats urinate on their own heads to smell more attractive to females.","Fun Fact: The person who invented the Frisbee was cremated and made into frisbees after he died!","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ","Fun Fact: ",];
 
     document.getElementById('welcomeMessage').innerHTML=welcomeMessages[Math.floor(Math.random()*welcomeMessages.length)];
     document.getElementById('howAreYou').innerHTML=howAreMessages[Math.floor(Math.random()*howAreMessages.length)];
     document.getElementById('funFact').innerHTML=funFact[Math.floor(Math.random()*funFact.length)];
-
-
   </script>
+  <div class="logout"><a href="/logout">Logout</a></div>
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container w3-center">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn">&times;</span>
+		<h1 id="clickedMessage"></h1><!The clicked Message Goes Here.->
+      </div>
+    </div>
+  </div>
   </body>
 </html>

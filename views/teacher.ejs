@@ -1,66 +1,310 @@
-<!doctype html>
-<html><head>
-<title>Teacher Page</title>
-<style>
-#extrainfo{display:none;}
-#student{background: #acacac;}
-#student:hover{background: #ffffff;}
-#student:hover #extrainfo, #student.hover #extrainfo {display:block;}
+<html>
+<head>
+<title>title
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
 
+<style>
+    body{
+    	background-image: url("./imageFiles/Verticalbackground.png");
+
+    	background-color: lightblue;
+
+    }
+	.panelselect{
+		border:3px solid;
+		border-top-left-radius: 2em;
+		border-top-right-radius:2em;
+		padding:0px;
+	}
+
+	.panelselect:first-child{
+		border:3px solid;
+		border-top-left-radius: 2em;
+	}
+	.panelselect div:hover{
+		background-color:blue;
+	}
+	.container1{
+		width:80%;
+		margin:auto;
+		background-color:rgb(83,218,255);
+		border: 4px solid black;
+
+	}
+	.container1 > div{
+		padding:0px;
+	}
+	.logout a{padding:5px;text-decoration: none}
+	.logout{
+      position: absolute;
+      bottom:5px;
+      left:5px;
+      background-color:orange;
+    }
+    .studentNameList{
+    	border:solid 1px black;
+    	margin-right:4px;
+    	height:400px;
+    	width:20%;
+    }
+    .studentInfo strong{font-size: 45px}
+    .studentInfo table{width:100%;}
+    .studentInfo table tr{width:100%;}
+    #studentList{
+    	max-height:100%;
+    	overflow: auto;
+    }
+    .option{border:blue 2px solid;}
+    #option1 form label {margin-left:10px;padding-top:50px;padding-bottom:50px;}
 </style>
 </head>
 <body>
-<a href="/logout">Logout of teacher account</a>
-<form action="/teacher" method="post">
-        <label>UserName</label>
-        <input type="text" name="username"><br>
-        <label>Password</label>
-        <input type="password" name="password"><br>
-	<label>Name</label>
-	<input type="text" name="realname"></input><br>
-	<label>isAdmin</label>
-	<input type="checkbox" name="isAdmin"><br>
-        <button type="submit">Create Student Account</button>
-</form>
+<div class="w3-container container1">
+	<div class="w3-row w3-center"><img width="70%" src="./imageFiles/logoWide.png"></div>
+	<div class="w3-row panelselect">
+		<ul class="w3-navbar w3-center">
+			<li class="w3-col s6 m3 l3 "><a href="#" onclick="display(0);" >Add accounts</a></li>
+			<li class="w3-col s6 m3 l3 "><a href="#" onclick="display(1);" >Student Info</a></li>
+			<li class="w3-col s6 m3 l3 "><a href="#" onclick="display(2);" >Today's attendance</a></li>
+			<li class="w3-col s6 m3 l3 "><a href="#" onclick="display(3);" >View reports</a></li>
+		</ul>
+	</div>
+	<div class="w3-row w3-container"><!--Each div in this row is its own section -->
 
-<div id="students">
+
+		<div id="option1" class="w3-row option">
+		<div class="w3-pale-yellow w3-card-4">
+		<div class="w3-container w3-yellow">
+		<h2>Add Accounts</h2>
+		</div>
+		<form action="/teacher" class="w3-container" method="post">
+		<label class="w3-text-red w3-label">UserName</label>
+        <input class="w3-input w3-border" type="text" name="username">
+        <label class="w3-label w3-text-red">Password</label>
+        <input class="w3-input w3-border" type="password" name="password">
+		<label class="w3-label w3-text-red">Name</label>
+		<input class="w3-input w3-border" type="text" name="realname"></input>
+		<input class="w3-check w3-border" type="checkbox" name="isAdmin"><label class="w3-validate w3-text-red" >Is a teacher</label><br><br>
+        <button class="w3-btn w3-yellow w3-col" type="submit">Create Account</button>
+		
+		</form>
+		</div>
+		</div>
+		<div id="optoin2" class="w3-row">
+			<div class="studentNameList w3-layout-cell">
+				<ul id="studentList" class="w3-hoverable w3-ul w3-card-4 rest">
+				</ul>
+			</div>
+
+			<div class="w3-layout-cell rest studentInfo" id="studentInfo"></div>
+
+
+
+
+		</div>
+		<div id="option3" class="w3-container">view attendance
+
+
+			<div class="w3-row" style="text-align:center;" id="attendanceNames">
+				<div w3-repeat="students" style="height:100px;background-color:{{color}};" class=" w3-col s4 m3 l2">
+					<h1 style="font-size:20px;">{{Student}}</h1>
+				</div>
+
+			</div>
+
+
+		</div>
+		<div id="option4">
+			<h2>Student Reports</h2>
+			<strong>Reports</stong>
+			<table id="reports1" class="w3-table-all">
+				<tr>
+					<th>Name</th>
+					<th>Message</th>
+					<th>Date</th>
+				</tr>
+				<tr w3-repeat="reports1">
+					<td>{{name}}</td>
+					<td>{{message}}</td>
+					<td>{{date}}</td>
+				</tr>
+			</table>
+
+			<strong>Counselor Requests</stong>
+			<table id="reports2" class="w3-table-all">
+				<tr>
+					<th>Name</th>
+					<th>Message</th>
+					<th>Date</th>
+				</tr>
+				<tr w3-repeat="reports2">
+					<td>{{name}}</td>
+					<td>{{message}}</td>
+					<td>{{date}}</td>
+				</tr>
+			</table>
+
+			<strong>Student Messages</stong>
+			<table id="reports3" class="w3-table-all">
+				<tr>
+					<th>Name</th>
+					<th>Message</th>
+					<th>Date</th>
+				</tr>
+				<tr w3-repeat="reports3">
+					<td>{{name}}</td>
+					<td>{{message}}</td>
+					<td>{{date}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </div>
-<script>//Maybe wrap this entire script in a ejs script that way it is secure
-var userstuff=<%- JSON.stringify(user) %> ;
+<script type="text/javascript">
+
+//---------------------------------------
+
+<%
+var userstuff=user;
 var names=[];
+var reports=[];
+var reports1=[];
+var reports2=[];
+var reports3=[];
 for(var i=0;i<userstuff.length;i++){
 	if(userstuff[i].local.realname!==undefined&&userstuff[i].local.realname!==""&&userstuff[i].local.isAdmin!==true){
-	names.push({
-		'realname': userstuff[i].local.realname,
-		'health' : userstuff[i].local.realname,
-		'position' : i
-	})
+		names.push({
+			'username': userstuff[i].local.username,
+			'realname': userstuff[i].local.realname,
+			'health' : 0,
+			'studentInfo':userstuff[i].local.emoji,
+			'position' : i,
+			'color' : "Red",
+			'ip'	: userstuff[i].local.ip
+		});
+		if(userstuff[i].local.schoolLoginDate.length>=1){
+			var now=new Date();
+			var before=new Date(userstuff[i].local.schoolLoginDate[userstuff[i].local.schoolLoginDate.length-1]);
+
+            var timeDiff = Math.ceil((now.getTime()-before.getTime())/(1000*60*60));
+			if (timeDiff<=8){
+				names[names.length-1].color = "Green";}
+		}
 	}
 }
-for(var i=0;i<names.length;i++){
-	document.getElementById('students').innerHTML+='<div id="student"><div style="float:left">Name: '+names[i].realname+'</div><div style="float:right">Health: '+names[i].health+'</div><br><div id="extrainfo">Other Student Info</div></div>';
+for(var i=0;i<userstuff.length;i++){
+		if(userstuff[i].publicReport.message!==undefined&&userstuff[i].publicReport.message!==""&&userstuff[i].publicReport.date!==""&&userstuff[i].publicReport.date!==undefined){
+			reports.push({
+					'name':userstuff[i].publicReport.realname,
+					'message':userstuff[i].publicReport.message,
+					'date':userstuff[i].publicReport.date,
+					'test':i
+				});}
+}
+for(var i=0;i<reports.length;i++){
+	var date2string = reports[i].date;
+	var dateAsDate = new Date(date2string);
+	var dateAsRealDate = dateAsDate.toString();
+	if(reports[i].message[0]!==null&&reports[i].message[0]!==""&&reports[i].message[0]!==undefined){
+		reports1.push({
+			'name':reports[i].name,
+			'message':reports[i].message[0],
+			'date':dateAsRealDate,
+		});}
+	if(reports[i].message[1]!==null&&reports[i].message[1]!==""&&reports[i].message[1]!==undefined){
+		reports2.push({
+			'name':reports[i].name,
+			'message':reports[i].message[1],
+			'date':dateAsRealDate
+		});}
+	if(reports[i].message[2]!==null&&reports[i].message[2]!==""&&reports[i].message[2]!==undefined){
+		reports3.push({
+			'name':reports[i].name,
+			'message':reports[i].message[2],
+			'date':dateAsRealDate
+		});}
 }
 
+
+var allReports=[{'reports1':reports1},{'reports2':reports2},{'reports3':reports3}];
+
+%>
+var names=<%-JSON.stringify(names)%>;
+
+
+
+//-----------------------------------
+for(var i=0;i<names.length;i++){//average health
+	var total=0;
+	for(var j=0;j<names[i].studentInfo.length;j++){
+		total+=names[i].studentInfo[j][1];
+	}
+	var average=total/names[i].studentInfo.length;
+	names[i].health=(average).toFixed(2);
+}
+
+
+var things=["option1","optoin2","option3","option4"];
+var hide=function(){
+for(var i=0;i<things.length;i++){
+	document.getElementById(things[i]).style.display = "none";
+}
+}
+
+var display = function(x){
+	hide();
+	document.getElementById(things[x]).style.display = "block";	
+}
+display(0);
+
+var displayStudent = function(x){
+	var output;
+	output='<strong class="">'+names[x].realname+'</strong><br><span>Username:'+names[x].username+'</span><table class="w3-table-all"><tr class="w3-blue"><th>Date</th><th>Emoji</th><th>Emoji Value</th></tr>';
+         
+ 	for(var i=0;i<names[x].studentInfo.length;i++){
+			var date2string = names[x].studentInfo[i][0];
+			var dateAsDate = new Date(date2string);
+			var dateAsRealDate = dateAsDate.toString();
+
+
+
+ 		var datething = dateAsRealDate;
+		var emojiValue = names[x].studentInfo[i][1];
+		var emojiIcon = names[x].studentInfo[i][2];
+		
+		output+='<tr><td>'+datething+'</td><td>'+emojiIcon+'</td><td>'+emojiValue+'</td></tr>';//the emojiIcon will need to be replaced with images
+ 	}
+
+	output+='</table>';
+	document.getElementById('studentInfo').innerHTML=output;
+}
+
+var addStudentsToList=function(){
+	var colors=["Green","Lime","Yellow","Orange","deep-orange","Red"]
+	for (var i = 0; i < names.length; i++) {
+		document.getElementById('studentList').innerHTML+='<li onclick="displayStudent('+i+');">'+names[i].realname+'<span class="w3-badge w3-'+colors[Math.floor(names[i].health)]+' w3-margin-left">'+names[i].health+'</span></li>';
+	}
+}
+addStudentsToList();
+//var attendanceNames={"students":[{'Student':'bob','color':'red'},{'Student':'Luke','color':'Green'}]};
+var myObject=<%-JSON.stringify(allReports)%>;
+
+var attendanceNames={'students':[]};
+for(var i=0;i<names.length;i++){
+	attendanceNames.students.push({
+		'Student':names[i].realname,
+		'color':names[i].color
+	});
+}
+w3DisplayData("reports1", myObject[0]);
+w3DisplayData("reports2", myObject[1]);
+w3DisplayData("reports3", myObject[2]);
+w3DisplayData("attendanceNames", attendanceNames);
+
 </script>
+  <div class="logout"><a href="/logout">Logout</a></div>
 </body>
 </html>
-
-
-<!--
-have it sort it before it writes to screen or after
-var $divs = $("div.box");
-
-$('#alphBnt').on('click', function(){
-    var alphabeticallyOrderedDivs = $divs.sort(function(a,b){
-        return $(a).find("h1").text() > $(b).find("h1").text();
-    });
-    $("#container").html(alphabeticallyOrderedDivs);
-});
-	    
-$('#numBnt').on('click', function(){
-    var numericallyOrderedDivs = $divs.sort(function(a,b){
-        return $(a).find("h2").text() > $(b).find("h2").text();
-    });
-    $("#container").html(numericallyOrderedDivs);
-});	
--->

@@ -1,22 +1,54 @@
 <!doctype html>
 <html>
-<head><title>Stem Website</title></head>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<title>Stem Website</title></head>
+<style>
+      body {
+		background-image: url("./imageFiles/Horizontalbackground.png");
+      } 
+    @media screen and (orientation:portrait){
+		body { 
+			background-image:url("./imageFiles/Verticalbackground.png");
+			background-repeat: no-repeat;
+		}
+	}
+	textarea{
+		width:90%;
+		margin-bottom:5px;
+		margin-top: 5px;
+		padding: 5px;
+		resize:none;
+		overflow:auto;
+	}
+	button{
+		margin:20px;
+		padding:25px 65px 25px 65px;
+		outline-color: red;
+		background-color:rgb(255,221,103);
+		border-radius: 5px;
+		font-size: 20px;
+	}
+	#formContainer{
+		background-color: rgb(101,177,239);
+		max-width: 700px;
+		width:90%;
+	}
+</style>
 <body>
 
+<center>
+<div id="formContainer" class="w3-center">
+	<textarea class="w3-container" placeholder="Is there something you would like to report?" rows="4" cols="50" name="message1" form="reportForm"></textarea>
+	<textarea class="w3-container" placeholder="Do you want to speak with a teacher?" rows="4" cols="50" name="message2" form="reportForm"></textarea>
+	<textarea class="w3-container" placeholder="Have something you want to share, or any suggestions?" rows="4" cols="50" name="message3" form="reportForm"></textarea>
 
-<div id="formContainer">
-<form action="/report" method="post" id="reportForm">
-        <button type="submit">Submit</button>
-</form>
-
-<textarea rows="4" cols="50" name="message1" form="reportForm">
-How is today going?(optional</textarea>
-<div>
-<textarea rows="4" cols="50" name="message2" form="reportForm">Did you notice anything happen today that others did not?(optional</textarea>
-<div>
-<textarea rows="4" cols="50" name="message3" form="reportForm">Tell us your feelings(optional)</textarea>
-<div>
-
+	<form action="/report" method="post" id="reportForm">
+	        <button type="submit">Submit/Logout</button>
+	</form>
+</div>
+</center>
 
 
 </body>

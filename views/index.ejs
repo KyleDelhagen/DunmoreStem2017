@@ -1,19 +1,79 @@
 <!doctype html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
 <title>StemWebsite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <style>
 
-body{background-image: url("imageFiles/indexBackground");}
+body{
+	background-image: url("/imageFiles/homepageFlat.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 100% 100%;
+    background-color:rgb(254,220,105);
+    border:1px solid #000000;
+}
+@media only screen and (min-width: 1920px) {
+    body { 
+           background-size: 1920px 1080px;
+           background-repeat: no-repeat;
+    }
+}
+@media only screen and (max-width: 600px) {
+    body { 
+           background-size: 200% 100%;
+           background-repeat: no-repeat;
+    }
+}
+
+
+button {
+    -moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+    box-shadow:inset 0px 1px 0px 0px #f9eca0;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffde67), color-stop(1, #f2ab1e) );
+    background:-moz-linear-gradient( center top, #ffde67 5%, #f2ab1e 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffde67', endColorstr='#f2ab1e');
+    background-color:#ffde67;
+    -webkit-border-top-left-radius:16px;
+    -moz-border-radius-topleft:16px;
+    border-top-left-radius:16px;
+    -webkit-border-top-right-radius:16px;
+    -moz-border-radius-topright:16px;
+    border-top-right-radius:16px;
+    -webkit-border-bottom-right-radius:16px;
+    -moz-border-radius-bottomright:16px;
+    border-bottom-right-radius:16px;
+    -webkit-border-bottom-left-radius:16px;
+    -moz-border-radius-bottomleft:16px;
+    border-bottom-left-radius:16px;
+    text-indent:0px;
+    border:1px solid #e6e6e6;
+    display:inline-block;
+    color:#65b1ef;
+    font-family:Verdana;
+    font-size:40px;
+    font-weight:bold;
+    font-style:normal;
+ }
+
+
+
+#button1{margin-bottom:20px;}
+
 </style>
 </head>
 <body>
-
-
-<a href="/login">School Login</a><br>
-<a href="/loginHome">Home Login</a><br>
-
-
-
+<div class="w3-row w3-bottom buttons w3-center">
+<form id="button1" class="w3-container w3-col s12 m6 w3-center" method="get" action="/loginHome">
+    <button class="" type="submit">Student</button>
+</form>
+<form class="w3-container w3-col s12 m6 w3-center" method="get" action="/login">
+    <button class="" type="submit">Teacher</button>
+</form>
+</div>
 </body>
 </html>
